@@ -22,6 +22,7 @@ export default function Carousel({ photos, interval = 3500 }) {
           key={src}
           src={src}
           alt={`Foto ${i + 1}`}
+            loading="lazy"
           className={`carousel__img ${i === active ? "is-active" : ""}`}
         />
       ))}

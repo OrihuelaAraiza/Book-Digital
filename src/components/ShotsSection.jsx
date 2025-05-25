@@ -17,6 +17,7 @@ export default function ShotsSection({ shots }) {
                 key={i}
                 src={src}
                 alt={`${shot.label} ${i + 1}`}
+                loading="lazy"    
                 className="shots-grid__img"
               />
             ))}

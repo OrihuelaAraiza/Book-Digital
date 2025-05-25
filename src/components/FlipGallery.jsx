@@ -12,6 +12,7 @@ export default function FlipGallery({ items }) {
               <img
                 src={item.img}
                 alt={`Producto ${index + 1}`}
+                loading="lazy"
                 className="flip-card__img"
               />
             </div>

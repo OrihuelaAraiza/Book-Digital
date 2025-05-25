@@ -28,6 +28,7 @@ export default function PairsCarousel({ pairs, interval = 4000 }) {
           <img
             src={pair.grid}
             alt={`Grid ${i + 1}`}
+            loading="lazy"
             className="pairs-carousel__img"
           />
         </div>

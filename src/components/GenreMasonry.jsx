@@ -14,6 +14,7 @@ export default function GenreMasonry({ genres }) {
                 <img
                   src={item.img}
                   alt={`${genre.label} ${i + 1}`}
+                    loading="lazy"
                   className="masonry-img"
                 />
                 <p className="masonry-caption">{item.text}</p>
