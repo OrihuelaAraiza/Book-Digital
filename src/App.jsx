@@ -1,6 +1,8 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import Section from "./components/Section";
+import { FaInstagram, FaLinkedin, FaFacebook, FaTwitter } from "react-icons/fa";
+
 
 // — Tarea 1 (carrusel) —
 import photo1 from "./assets/tarea1/01.jpg";
@@ -269,10 +271,47 @@ const sections = [
        { img: model16 }, { img: model17 },
      ],
    },
-  { id: "tarea9",  title: "Tarea 9 · Stopmotion" },
-  { id: "tarea10", title: "Tarea 10 · Timelapse" },
-  { id: "datos",   title: "Datos personales del fotógrafo" },
-  { id: "conclusion", title: "Conclusión final de la materia" },
+ {
+    id: "tarea9",
+    title: "Tarea 9 · Stopmotion",
+    type: "stopmotion",
+    videoSrc:
+      "https://drive.google.com/file/d/1QqwYeAQdt8sdecfPYVYXT3o3_jEJA29X/preview",
+  },
+{
+    id: "tarea10",
+    title: "Tarea 10 · Timelapse",
+    type: "timelapse",
+    videoSrc:
+      "https://drive.google.com/file/d/11hGkg0WWTN94Mg8JNP-4-rC6RZBEV_VS/preview",
+  },
+  {
+    id: "datos",
+    title: "Datos personales del fotógrafo",
+    type: "profile",
+    profile: {
+      name: "Juan Pablo Orihuela",
+      artisticName: "JP Orihuela Photography",
+      avatar: "/Users/JP/Desktop/6to Semestre/book-digital/src/assets/avatar.jpg",
+      social: [
+        { url: "https://instagram.com/tuusuario", icon: <FaInstagram /> },
+        { url: "https://linkedin.com/in/tuusuario", icon: <FaLinkedin /> },
+        { url: "https://facebook.com/tuusuario", icon: <FaFacebook /> },
+        { url: "https://twitter.com/tuusuario", icon: <FaTwitter /> },
+      ],
+    },
+  },
+  {
+    id: "conclusion",
+    title: "Conclusión final de la materia",
+    type: "conclusion",
+    conclusionText: `
+      A lo largo de este Book Digital he explorado múltiples técnicas fotográficas,
+      desde encuadres clásicos hasta videos stopmotion y timelapses.
+      Cada sección refleja mi crecimiento como fotógrafo y mi pasión por
+      la narrativa visual. Gracias por acompañarme en este recorrido.
+    `,
+  },
 ];
 
 export default function App() {
@@ -287,35 +326,16 @@ export default function App() {
         </p>
       </header>
 
-      {sections.map(
-        ({
-          id,
-          title,
-          type,
-          photos,
-          shots,
-          videoSrc,
-          pairs,
-          items,
-          genres,
-        }) => (
-          <Section
-            key={id}
-            id={id}
-            title={title}
-            type={type}
-            photos={photos}
-            shots={shots}
-            videoSrc={videoSrc}
-            pairs={pairs}
-            items={items}
-            genres={genres}
-          />
-        )
-      )}
+      {sections.map((section) => (
+        // Spread de **todas** las props, incluidas profile & conclusionText
+        <Section key={section.id} {...section} />
+      ))}
 
       <footer className="footer">
-        <p>© {new Date().getFullYear()} Juan Pablo Orihuela · Todos los derechos reservados</p>
+        <p>
+          © {new Date().getFullYear()} Juan Pablo Orihuela · Todos los derechos
+          reservados
+        </p>
       </footer>
     </>
   );

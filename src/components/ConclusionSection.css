@@ -1,0 +1,15 @@
+.conclusion-section {
+  padding: 3rem 2rem;
+  background: var(--color-bg);
+  border-top: 4px solid var(--color-primary);
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.conclusion-text {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--color-text);
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+}

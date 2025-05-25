@@ -1,14 +1,16 @@
-// src/components/Section.jsx
-
 import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
-import Carousel from "./Carousel";
-import ShotsSection from "./ShotsSection";
-import PairsCarousel from "./PairsCarousel";
-import ParallaxSection from "./ParallaxSection"; 
-import FlipGallery from "./FlipGallery";
-import GenreMasonry from "./GenreMasonry";
-import TiltGallery from "./TiltGallery";
+
+import Carousel         from "./Carousel";
+import ShotsSection     from "./ShotsSection";
+import PairsCarousel    from "./PairsCarousel";
+import ParallaxSection  from "./ParallaxSection";
+import FlipGallery      from "./FlipGallery";
+import GenreMasonry     from "./GenreMasonry";
+import TiltGallery      from "./TiltGallery";
+import ProfileSection   from "./ProfileSection";
+import ConclusionSection from "./ConclusionSection";
+
 import "./Section.css";
 
 export default function Section({
@@ -19,52 +21,58 @@ export default function Section({
   shots,
   videoSrc,
   pairs,
-  items,  
-  genres,         
-items: tiltItems,
+  items,
+  genres,
+  profile,
+  conclusionText,
 }) {
   const ref = useRef(null);
 
   useEffect(() => {
     const el = ref.current;
-    const observer = new IntersectionObserver(
+    const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           el.classList.add("section--visible");
-          observer.unobserve(el);
+          obs.unobserve(el);
         }
       },
-      { threshold: 0 } // threshold 0 para que aparezca al mínimo scroll
+      { threshold: 0.2 }
     );
-    observer.observe(el);
-    return () => observer.disconnect();
+    obs.observe(el);
+    return () => obs.disconnect();
   }, []);
+
+  const descriptions = {
+    carousel:      "Prepara una presentación con cinco fotos que encuentramos en internet.",
+    shots:         "Una toma requiere un sujeto; el encuadre, que puede prescindir de él, provoca sensaciones; y, a diferencia de los movimientos de cámara, no implica desplazamiento.",
+    video:         "Los movimientos de cámara son los desplazamientos o giros  para cambiar la perspectiva y aportar dinamismo a la escena.",
+    pairsCarousel: "Regla de tercios: divide el encuadre en nueve partes para equilibrar la composición.ley de la mirada: deja espacio hacia donde mira el sujeto;cuadrícula: guía de alineación de elementos; puntos de fuga: convergencia de líneas para crear profundidad.",
+    parallax:      "Preparamos una presentación con 5 fotos de comida, como si fueran un post de Instagram, y añade a cada una un “copy”: un texto breve que enganche, persuada y motive a tu audiencia..",
+    flip:          "Galería de producto: gira cada tarjeta para ver la fras, En 90 minutos montamos fondo y superficie, colocamos luces principales y de relleno para sacar la textura sin sombras duras, ajustamos ángulos, alturas y balances de blancos mientras disparábamos en orden, y aprovechamos trípode y disparador remoto para cambiar rápido de toma; así optimizamos tiempo y logramos fotos nítidas y bien iluminadas..",
+    masonry:       "Los géneros fotográficos son esas categorías que agrupan las fotos según su propósito, tema o estilo —por ejemplo, retrato, documental o publicitaria— y marcan tanto la forma de plantear la toma (encuadres, luces, ángulos) como el objetivo final (emocionar, informar, vender, crear arte, etc.).",
+    tilt:          "Sesión temática de béisbol con modelo en uniforme, poses de  lanzamiento, iluminación natural y ángulos bajos para transmitir la energía del juego en clave de moda deportiva.",
+    profile:       "Presentación del fotógrafo con tus redes sociales.",
+    conclusion:    "Cierre con reflexiones y aprendizajes.",
+    stopmotion:   "Un StopMotion es capturar fotograma a fotograma para simular movimiento; elegí Legos por sus múltiples articulaciones y su versatilidad y colores vibrantes.",
+     timelapse:    "Timelapse: lidiar con exposiciones largas y cambios de luz constantes para comprimir horas en segundos.",
+  };
 
   return (
     <section id={id} ref={ref} className="section">
       <h2 className="section__title">{title}</h2>
-      <p className="section__desc">
-        {{
-          carousel: "Carrusel automático de cinco fotos.",
-          shots: "Ejemplos de distintos encuadres con hasta cuatro imágenes.",
-          video: "Mira este videoreel con movimientos destacados.",
-          pairsCarousel:
-            "Comparativa original vs regla de tercios / ley de la mirada.",
-          parallax: "Fotografía de comida con un copy llamativo.",
-          flip: "Galería de producto: gira cada tarjeta para ver la frase.",
-          masonry: "Mosaico de géneros musicales.",
-          tilt: "Modelaje temático: Diablos Rojos."
-        }[type] || "Aquí va la descripción de la actividad."}
-      </p>
+      {descriptions[type] && (
+        <p className="section__desc">{descriptions[type]}</p>
+      )}
 
-      {type === "carousel" && <Carousel photos={photos} />}
-      {type === "shots" && <ShotsSection shots={shots} />}
-      {type === "video" && (
-        <div className="video-container">
+      {type === "carousel"      && <Carousel photos={photos} />}
+      {type === "shots"         && <ShotsSection shots={shots} />}
+      {(type === "video" || type === "stopmotion" || type === "timelapse") && (
+        <div className="video-container video-container--neon">
           {videoSrc.startsWith("http") ? (
             <iframe
               src={videoSrc}
-              className="video-player"
+              className="video-player video-player--neon"
               allow="autoplay; encrypted-media"
               allowFullScreen
               title={title}
@@ -73,33 +81,39 @@ items: tiltItems,
             <video
               src={videoSrc}
               controls
-              className="video-player"
+              className="video-player video-player--neon"
             />
           )}
         </div>
-       )}
+      )}
       {type === "pairsCarousel" && <PairsCarousel pairs={pairs} />}
-      {type === "parallax" && <ParallaxSection items={items} />}
-      {type === "flip"           && <FlipGallery items={items} />}
-      {type === "masonry"      && <GenreMasonry genres={genres} />}
+      {type === "parallax"      && <ParallaxSection items={items} />}
+      {type === "flip"          && <FlipGallery items={items} />}
+      {type === "masonry"       && <GenreMasonry genres={genres} />}
       {type === "tilt"          && <TiltGallery items={items} />}
-      
-      
+      {type === "profile"       && <ProfileSection profile={profile} />}
+      {type === "conclusion"    && <ConclusionSection text={conclusionText} />}
 
-      {!type && <div className="media-grid">{/* grid genérico */}</div>}
+      {!type && <div className="media-grid">{/* fallback genérico */}</div>}
     </section>
   );
 }
 
 Section.propTypes = {
-  id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  type: PropTypes.string,
-  photos: PropTypes.array,
-  shots: PropTypes.array,
-  videoSrc: PropTypes.string,
-  pairs: PropTypes.array,
-  items: PropTypes.array,   
-  genres: PropTypes.array,  
-  items: PropTypes.array,
+  id:             PropTypes.string.isRequired,
+  title:          PropTypes.string.isRequired,
+  type:           PropTypes.string,
+  photos:         PropTypes.arrayOf(PropTypes.string),
+  shots:          PropTypes.array,
+  videoSrc:       PropTypes.string,
+  pairs:          PropTypes.array,
+  items:          PropTypes.array,
+  genres:         PropTypes.array,
+  profile:        PropTypes.shape({
+    name:         PropTypes.string.isRequired,
+    artisticName: PropTypes.string.isRequired,
+    avatar:       PropTypes.string.isRequired,
+    social:       PropTypes.array.isRequired,
+  }),
+  conclusionText: PropTypes.string,
 };

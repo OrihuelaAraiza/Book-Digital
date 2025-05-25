@@ -10,8 +10,11 @@ export default function ParallaxSection({ items }) {
         <div
           key={idx}
           className="parallax"
+
           style={{ backgroundImage: `url(${item.img})` }}
+          
         >
+
           <div className="parallax__text">{item.copy}</div>
         </div>
       ))}

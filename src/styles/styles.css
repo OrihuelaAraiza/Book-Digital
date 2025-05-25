@@ -134,8 +134,7 @@ body {
 
 /* ------- Section -------- */
 .section {
-  opacity: 0;
-  transition: opacity 0.8s ease;
+
   padding: 4rem 1rem;
   max-width: 1200px;
   margin-inline: auto;
@@ -216,3 +215,4 @@ button,
   border: none;      /* importante para iframes */
   display: block;
 }
+
