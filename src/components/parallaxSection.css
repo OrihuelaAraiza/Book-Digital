@@ -1,0 +1,26 @@
+/* src/components/parallaxSection.css */
+.parallax {
+  position: relative;
+  height: 60vh;                    /* ocupa 60% de la pantalla */
+  margin-bottom: 2rem;             /* espacio entre cada bloque */
+  background-attachment: fixed;    /* aquí es donde ocurre el parallax */
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.parallax__text {
+  position: relative;
+  z-index: 1;
+  background: rgba(13, 17, 23, 0.6);
+  backdrop-filter: blur(5px);
+  color: #e6edf3;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  max-width: 70ch;
+  text-align: center;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+}
