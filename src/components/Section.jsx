@@ -61,9 +61,23 @@ items: tiltItems,
       {type === "shots" && <ShotsSection shots={shots} />}
       {type === "video" && (
         <div className="video-container">
-          <video src={videoSrc} controls className="video-player" />
+          {videoSrc.startsWith("http") ? (
+            <iframe
+              src={videoSrc}
+              className="video-player"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+              title={title}
+            />
+          ) : (
+            <video
+              src={videoSrc}
+              controls
+              className="video-player"
+            />
+          )}
         </div>
-      )}
+       )}
       {type === "pairsCarousel" && <PairsCarousel pairs={pairs} />}
       {type === "parallax" && <ParallaxSection items={items} />}
       {type === "flip"           && <FlipGallery items={items} />}

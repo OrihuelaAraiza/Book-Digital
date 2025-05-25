@@ -45,7 +45,7 @@ import holandes2 from "./assets/tarea2/holandes/02.jpg";
 import longShot1 from "./assets/tarea2/longShot/01.jpg";
 
 // — Tarea 3 (vídeo) —
-import videoT3 from "./assets/tarea3/Movimientos de Camara.mp4";
+
 
 // — Tarea 4 (pairsCarousel) —
 import r1 from "./assets/tarea4/01.jpg";
@@ -160,7 +160,7 @@ const sections = [
     id: "tarea3",
     title: "Tarea 3 · Videoreel con movimientos",
     type: "video",
-    videoSrc: videoT3,
+    videoSrc: "https://drive.google.com/file/d/1CeQL3z4S8gbFbcetU3jbt9akLKvbbklk/preview",
   },
   {
     id: "tarea4",

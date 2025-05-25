@@ -1,0 +1,21 @@
+.navbar {
+  background: var(--color-secondary);
+}
+.navbar__brand,
+.navbar__link,
+.navbar__toggle {
+  color: var(--color-text);
+}
+.navbar__link::after {
+  background: var(--color-primary);
+}
+.navbar__link:hover {
+  color: var(--color-primary);
+}
+.navbar__list {
+  list-style: none;  /* quita el bullet */
+  margin: 0;         /* elimina indentación */
+  padding: 0;        /* elimina indentación */
+  display: flex;
+  gap: 1rem;
+}

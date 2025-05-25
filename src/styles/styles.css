@@ -1,4 +1,14 @@
-/* -------- Reset rápido -------- */
+:root {
+  /* Paleta neón sobre fondo oscuro */
+  --color-bg: #0e0b16;
+  --color-bg-alt: #1a1a2e;
+  --color-primary: #e94560;    /* rojo vibrante */
+  --color-secondary: #0f3460;  /* azul intenso */
+  --color-accent: #53354a;     /* púrpura profundo */
+  --color-text: #f0f0f0;       /* prácticamente blanco */
+}
+
+/* Reset rápido */
 *,
 *::before,
 *::after {
@@ -10,17 +20,17 @@
 
 body {
   font-family: "Inter", system-ui, sans-serif;
-  background: #0d1117;
-  color: #e6edf3;
+  background: var(--color-bg);
+  color: var(--color-text);
   line-height: 1.6;
 }
 
-/* -------- Navbar -------- */
+/* ------- Navbar (se integra aquí si no usas archivo aparte) ------- */
 .navbar {
   position: sticky;
   top: 0;
   width: 100%;
-  background: rgba(13, 17, 23, 0.9);
+  background: var(--color-secondary);
   backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
@@ -33,13 +43,14 @@ body {
 .navbar__brand {
   font-weight: 700;
   cursor: pointer;
+  color: var(--color-text);
 }
 
 .navbar__toggle {
   display: none;
   font-size: 1.5rem;
   background: none;
-  color: inherit;
+  color: var(--color-text);
   border: none;
   cursor: pointer;
 }
@@ -49,10 +60,15 @@ body {
   gap: 1rem;
 }
 
+.navbar__item {}
+
 .navbar__link {
   text-decoration: none;
-  color: inherit;
+  color: var(--color-text);
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .navbar__link::after {
@@ -62,12 +78,38 @@ body {
   bottom: -2px;
   width: 0;
   height: 2px;
-  background: #58a6ff;
+  background: var(--color-primary);
   transition: width 0.3s;
+}
+
+.navbar__link:hover {
+  color: var(--color-primary);
 }
 
 .navbar__link:hover::after {
   width: 100%;
+}
+
+/* Responsive Navbar */
+@media (max-width: 768px) {
+  .navbar__toggle {
+    display: block;
+  }
+  .navbar__list {
+    position: absolute;
+    inset: 100% 0 auto 0;
+    flex-direction: column;
+    background: var(--color-bg-alt);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .navbar--open .navbar__list {
+    max-height: 60vh;
+  }
+  .navbar__item {
+    padding: 0.75rem 1.5rem;
+  }
 }
 
 /* ------- Hero -------- */
@@ -77,11 +119,12 @@ body {
   place-content: center;
   text-align: center;
   padding: 4rem 1rem;
-  background: radial-gradient(ellipse at center, #161b22 0%, #0d1117 100%);
+  background: var(--color-bg-alt);
 }
 
 .hero__title {
   font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--color-primary);
 }
 
 .hero__subtitle {
@@ -92,131 +135,50 @@ body {
 /* ------- Section -------- */
 .section {
   opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transition: opacity 0.8s ease;
   padding: 4rem 1rem;
   max-width: 1200px;
   margin-inline: auto;
+  background: var(--color-bg);
 }
 
 .section--visible {
   opacity: 1;
-  transform: translateY(0);
 }
 
 .section h2 {
   font-size: clamp(1.8rem, 4vw, 2.5rem);
   margin-bottom: 1rem;
-  color: #58a6ff;
+  color: var(--color-primary);
 }
 
 .section__desc {
   margin-bottom: 2rem;
   max-width: 70ch;
+  color: var(--color-text);
 }
 
-/* ------- Media Grid -------- */
+/* ------- Carousel hover indicator etc ------- */
+.carousel__indicators .dot--active,
+.pairs-carousel__dot.dot--active,
+button,
+.tilt-button {
+  background: var(--color-primary);
+  color: var(--color-text);
+}
+
+/* ------- Media Grid (otras tareas) -------- */
 .media-grid {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
-
-.media-grid__item {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  object-fit: cover;
-  transition: transform 0.4s ease;
 }
 
 .media-grid__item:hover {
   transform: scale(1.03);
 }
 
-/* ------- Footer -------- */
-.footer {
-  text-align: center;
-  padding: 2rem 1rem;
-  background: #161b22;
-  margin-top: 4rem;
-  font-size: 0.875rem;
-}
-
-/* ------- Responsive Navbar -------- */
-@media (max-width: 768px) {
-  .navbar__toggle {
-    display: block;
-  }
-
-  .navbar__list {
-    position: absolute;
-    inset: 100% 0 auto 0;
-    flex-direction: column;
-    background: #0d1117;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-  }
-
-  .navbar--open .navbar__list {
-    max-height: 60vh;
-  }
-
-  .navbar__item {
-    padding: 0.75rem 1.5rem;
-  }
-}
-.carousel:hover .carousel__img.is-active {
-  transform: scale(1.03);
-}
-/* ------- Section (global) -------- */
-.section {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-  padding: 4rem 1rem;
-  max-width: 1200px;
-  margin-inline: auto;
-}
-
-.section--visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.section h2 {
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-  margin-bottom: 1rem;
-  color: #58a6ff;
-}
-
-.section__desc {
-  margin-bottom: 2rem;
-  max-width: 70ch;
-}
-
-/* Grilla genérica (para otras tareas) */
-.media-grid {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
-/* Contenedor del video */
-.video-container {
-  max-width: 800px;
-  margin-inline: auto;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-/* El propio video */
-.video-player {
-  width: 100%;
-  display: block;
-  max-height: 450px;
-}
+/* ------- Video Container -------- */
 .video-container {
   max-width: 800px;
   margin-inline: auto;
@@ -230,36 +192,27 @@ body {
   display: block;
   max-height: 450px;
 }
-
-/* ------- Section (global) -------- */
-.section {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-  padding: 4rem 1rem;
-  max-width: 1200px;
-  margin-inline: auto;
-}
-
-.section--visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.section h2 {
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-  margin-bottom: 1rem;
-  color: #58a6ff;
-}
-
-.section__desc {
-  margin-bottom: 2rem;
-  max-width: 70ch;
-}
-
-/* Grilla genérica (para otras tareas) */
-.media-grid {
-  display: grid;
+.navbar__list {
+  list-style: none;  /* quita el bullet */
+  margin: 0;         /* elimina indentación */
+  padding: 0;        /* elimina indentación */
+  display: flex;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.video-container {
+  max-width: 800px;
+  margin-inline: auto;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  background: var(--color-bg-alt);
+}
+
+/* Aplica tanto a <video> como a <iframe> */
+.video-player {
+  width: 100%;
+  height: 450px;     /* puedes ajustar ratio o usar height: 100%; */
+  border: none;      /* importante para iframes */
+  display: block;
 }
