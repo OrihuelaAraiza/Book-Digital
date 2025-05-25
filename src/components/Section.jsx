@@ -9,7 +9,7 @@ import FlipGallery      from "./FlipGallery";
 import GenreMasonry     from "./GenreMasonry";
 import TiltGallery      from "./TiltGallery";
 import ProfileSection   from "./ProfileSection";
-import ConclusionSection from "./ConclusionSection";
+import Poster            from "./Poster";
 
 import "./Section.css";
 
@@ -92,7 +92,7 @@ export default function Section({
       {type === "masonry"       && <GenreMasonry genres={genres} />}
       {type === "tilt"          && <TiltGallery items={items} />}
       {type === "profile"       && <ProfileSection profile={profile} />}
-      {type === "conclusion"    && <ConclusionSection text={conclusionText} />}
+{type === "conclusion" && <Poster text={conclusionText} />}
 
       {!type && <div className="media-grid">{/* fallback genérico */}</div>}
     </section>

@@ -1,0 +1,54 @@
+/* src/components/Poster.css */
+
+.poster {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #ff5f7e 0%, #ff9a5b 100%);
+  color: #fff;
+  font-family: "Inter", sans-serif;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.poster__title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.poster__subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+}
+
+.poster__list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  text-align: left;
+}
+
+.poster__list li {
+  font-size: 1.1rem;
+  margin: 0.75rem 0;
+  display: flex;
+  align-items: center;
+}
+
+.poster__list li::before {
+  content: "";
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 0.75rem;
+}
+
+.poster__footer {
+  font-style: italic;
+  opacity: 0.85;
+  margin-top: 1rem;
+}
